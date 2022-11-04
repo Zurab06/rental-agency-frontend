@@ -1,0 +1,129 @@
+.main {
+  background-color: black;
+  border: 1px solid;
+  padding: 10px;
+  display: flex;
+  justify-content: end;
+}
+.user_logo {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+}
+
+.user_logo_img {
+  width: 80%;
+  height: 80%;
+}
+.auth_modal {
+  border: 1px solid;
+  position: absolute;
+  padding: 5px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: fit-content;
+  flex-direction: column;
+}
+
+.modal_header {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.modal_header button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 90%;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 1rem;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.modal_header button:hover {
+  color: rgb(186, 20, 20);
+}
+
+.modal_body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.inp_auth {
+  outline: 0ch;
+  border: 0;
+  width: 90%;
+  margin-bottom: 10px;
+  padding: 2px;
+  border-bottom: 1px solid gray;
+}
+.inp_auth input {
+  border: 0ch;
+  outline: 0;
+  width: 100%;
+}
+.modal_footer {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.btn_reset {
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 3px;
+  background: transparent;
+  color: rgb(0, 85, 255);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn_submit {
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 3px;
+  background: rgb(0, 85, 255);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+.singUp {
+  margin-top: 10px;
+}
+.singUp a {
+  color: rgb(0, 85, 255);
+}
+.modal_footer button {
+  width: 40%;
+}
+.singUp {
+  cursor: pointer;
+  color: rgb(0, 85, 255);
+}
+@media (max-width: 768px) {
+  .auth_modal {
+    width: 70vw;
+  }
+}
+@media (min-width: 769px) {
+  .auth_modal {
+    width: 33vw;
+  }
+}
