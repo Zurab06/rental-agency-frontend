@@ -1,0 +1,48 @@
+.main {
+  box-sizing: border-box;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: none;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 10vh;
+  align-items: center;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .Content h1 {
+    -webkit-text-stroke: 1px rgb(0, 0, 0);
+    margin: auto;
+    font-weight: 600;
+    font-size: 3rem;
+  }
+  .Content h3 {
+    font-weight: 400;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 991px) {
+  .Content h1 {
+    margin: auto;
+    font-weight: 700;
+    font-size: 5rem;
+  }
+  .Content h3 {
+    font-weight: 400;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .Content h1 {
+    margin: auto;
+    font-weight: 700;
+    font-size: 6rem;
+  }
+  .Content h3 {
+    font-weight: 400;
+    font-size: 3rem;
+  }
+} ;
