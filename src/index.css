@@ -1,5 +1,15 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
-
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;700&display=swap");
 * {
+  font-family: "Open Sans", sans-serif;
   margin: 0;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("https://img2.akspic.ru/crops/2/5/4/4452/4452-prirodnyj_zapovednik-gory-dikaya_mestnost-nebo-priroda-1920x1080.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
