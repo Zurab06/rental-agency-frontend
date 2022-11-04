@@ -1,0 +1,140 @@
+.card {
+  width: 15rem;
+  height: 20rem;
+}
+.card:hover .icons div{
+    color: rgb(27, 136, 15);
+}
+.card:hover .card_text .link{
+    color: rgb(0, 34, 255);
+}
+.card:hover{
+    box-shadow: 0 0 10px
+    rgba(0,0,0,.25);
+}
+.image img {
+  width: 15rem;
+}
+.card_text {
+  padding: 15px 15px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid grey;
+}
+.icons {
+    margin-top: 10px;
+  padding: 0 15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.button div .favorites {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  background-color: #fff;
+  color: #3a3d52;
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+
+.button div .favorites:focus {
+  animation: scaleDown 0.5s ease-in-out;
+}
+.button div .favorites i {
+  color: #777b9f;
+  transform-origin: top;
+}
+.button div .favorites:focus i {
+  animation: ribbon 0.25s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+@keyframes ribbon {
+  0% {
+    transform: scaleY(0.1);
+  }
+  25% {
+    transform: scaleY(0.13s);
+  }
+  100% {
+    color: #ed3f40;
+  }
+}
+@keyframes scaleDown {
+  0% {
+    transform: scale(0.98);
+  }
+}
+.more {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  background-color: #fff;
+  color: #3a3d52;
+  padding: 8px 10px;
+  border: none;
+  transition: background-color 0.25s;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.more:hover{
+    background-color: #e6e6e6;
+}
+main{
+    max-width: 75%;
+    border-color: red;
+    margin: auto;
+    margin-top: 80px;
+}
+main .header{
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 3px 5px
+    rgba(0,0,0,.10);
+    
+}
+.cards{
+    display: flex;
+    justify-content: space-around;
+}
+.priceButton{
+    border: none;
+    background-color: transparent;
+    transition: color 0.25s;
+    font-size: 20px;
+   
+}
+.priceButton:hover{
+     color: rgb(27, 136, 15);
+}
+.price{
+    border-right: 1px solid gray;
+    padding: 0 5px;
+}
+.priceBeds{
+    display: flex;
+    align-items: center;
+}
+.beds{
+   padding: 0 10px;
+   
+}
+.beds:hover{
+    box-shadow: 0 0 5px
+    rgba(0,0,0,.25);
+}
+.price:hover{
+    box-shadow: 0 0 5px
+    rgba(0,0,0,.25);
+}
