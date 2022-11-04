@@ -1,5 +1,4 @@
 import React from "react";
-import { Col, Container } from "react-bootstrap";
 import styles from "./Header.module.css";
 import logo from "../images/Logo_black.png";
 import Authorization from "../Authorization/Authorization";
