@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ImmovablesCard from "./ImmovablesCard";
 import styles from "./Immovables.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMoneyCheckDollar,
+import { useSelector,  useDispatch  } from 'react-redux';
+import { immovablesFetch } from './../../features/immovablesSlice';
+import {  faMoneyCheckDollar,
   faArrowUp,
   faArrowDown,
   faBed,
 } from "@fortawesome/free-solid-svg-icons";
 
 const ImmovablesCards = () => {
+  const Immovables = useSelector(state=>state.immovables)
+  const loading = useSelector(state=>state.loading)
+  const dispatch = useDispatch()
+  useEffect(()=> {
+dispatch(immovablesFetch())
+  }, [dispatch])
+  if(loading) {
+return 'загрузка'
+  }
   return (
     <main>
       <div className={styles.header}>
