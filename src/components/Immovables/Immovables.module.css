@@ -2,19 +2,27 @@
   margin-top: 5rem;
   margin-left: 1rem;
   width: 15rem;
-  height: 20rem;
+  min-height: 20rem;
+  transition: box-shadow 0.25s;
 }
 .card:hover .icons div {
   color: rgb(27, 136, 15);
 }
+.card:hover .icons div{
+  transition: color 0.25s;
+}
 .card:hover .card_text .link {
   color: rgb(0, 34, 255);
+}
+.card .card_text .link{
+  transition: color 0.25s;
 }
 .card:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
 .image img {
   width: 15rem;
+  height: 10rem;
 }
 .card_text {
   padding: 15px 15px;
@@ -135,9 +143,6 @@
 .beds {
   padding: 0 10px;
 }
-.beds:hover {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
-}
 .price:hover {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
 }
@@ -156,3 +161,13 @@
     font-size: 1rem;
   }
 }
+.favoritesUser{
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+  transition: color 0.25s;
+}
+.favoritesUser:hover{
+  color: #ed3f40;
+}
+

@@ -9,28 +9,28 @@ import {
 import 'remixicon/fonts/remixicon.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const ImmovablesCard = () => {
+const ImmovablesCard = (props) => {
   return (
-    <div className={styles.card}>
+    <div className={styles.card} key={props._id}>
       <div className={styles.image}>
         <img
-          src="https://homepress.stylemixthemes.com/wp-content/uploads/2019/03/townhome-12-1399x899.jpg"
+          src={`http://localhost:3001/${props.image[0]}`}
           alt=""
         />
       </div>
       <div className={styles.card_text}>
-        <span className={styles.link}>House on the Arcadia</span>
-        <span>$1,200/mo</span>
+        <span className={styles.link}>{props.name}</span>
+        <span>${props.price}</span>
       </div>
       <div className={styles.icons}>
         <div>
-          <FontAwesomeIcon icon={faBed} /> <span>1</span>
+          <FontAwesomeIcon icon={faBed} /> <span>{props.options.Baths}</span>
         </div>
         <div>
-          <FontAwesomeIcon icon={faCar} /> <span>2</span>
+          <FontAwesomeIcon icon={faCar} /> <span>{props.options.Garage}</span>
         </div>
         <div>
-          <FontAwesomeIcon icon={faBath} /> <span>1</span>
+          <FontAwesomeIcon icon={faBath} /> <span>{props.options.Beds}</span>
         </div>
         <div>
           <FontAwesomeIcon icon={faCat} /> <span>Yes</span>
@@ -53,3 +53,7 @@ const ImmovablesCard = () => {
 };
 
 export default ImmovablesCard;
+
+
+
+
