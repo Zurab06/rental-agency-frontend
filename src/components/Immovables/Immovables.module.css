@@ -1,5 +1,6 @@
 .card {
-  margin-top: 8vh;
+  margin-top: 5rem;
+  margin-left: 1rem;
   width: 15rem;
   height: 20rem;
 }
@@ -107,9 +108,11 @@
   padding: 0 15%;
 }
 .cards {
+  box-sizing: border-box;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-wrap: wrap;
+  align-items: center;
   padding: 0 15%;
 }
 .priceButton {

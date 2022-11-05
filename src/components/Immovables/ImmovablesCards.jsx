@@ -45,6 +45,7 @@ const ImmovablesCards = () => {
         <ImmovablesCard />
         <ImmovablesCard />
         <ImmovablesCard />
+        <ImmovablesCard />
       </div>
     </div>
   );
