@@ -11,7 +11,7 @@ import {
 
 const ImmovablesCards = () => {
   return (
-    <main>
+    <div className={styles.main}>
       <div className={styles.header}>
         <h1>Real Estate Rental Offers</h1>
         <div className={styles.priceBeds}>
@@ -24,7 +24,6 @@ const ImmovablesCards = () => {
               <FontAwesomeIcon icon={faArrowUp} />
             </button>
             <button className={styles.priceButton}>
-              
               <FontAwesomeIcon icon={faArrowDown} />
             </button>
           </div>
@@ -34,7 +33,6 @@ const ImmovablesCards = () => {
               <FontAwesomeIcon icon={faArrowUp} />
             </button>
             <button className={styles.priceButton}>
-              
               <FontAwesomeIcon icon={faArrowDown} />
             </button>
           </div>
@@ -43,8 +41,12 @@ const ImmovablesCards = () => {
 
       <div className={styles.cards}>
         <ImmovablesCard />
+        <ImmovablesCard />
+        <ImmovablesCard />
+        <ImmovablesCard />
+        <ImmovablesCard />
       </div>
-    </main>
+    </div>
   );
 };
 
