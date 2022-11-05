@@ -2,26 +2,33 @@ import React, { useEffect } from "react";
 import ImmovablesCard from "./ImmovablesCard";
 import styles from "./Immovables.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSelector,  useDispatch  } from 'react-redux';
-import { immovablesFetch } from './../../features/immovablesSlice';
-import {  faMoneyCheckDollar,
+import { useSelector, useDispatch } from "react-redux";
+import { immovablesFetch } from "./../../features/immovablesSlice";
+import {
+  faMoneyCheckDollar,
   faArrowUp,
   faArrowDown,
   faBed,
 } from "@fortawesome/free-solid-svg-icons";
 
 const ImmovablesCards = () => {
-  const Immovables = useSelector(state=>state.immovables)
-  const loading = useSelector(state=>state.loading)
-  const dispatch = useDispatch()
-  useEffect(()=> {
-dispatch(immovablesFetch())
-  }, [dispatch])
-  if(loading) {
-return 'загрузка'
+  const immovables = useSelector((state) => state.immovables.immovablesList);
+  const loading = useSelector((state) => state.immovables.loading);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(immovablesFetch());
+  }, [dispatch]);
+
+  function filter(filter) {
+    dispatch(immovablesFetch(filter));
   }
+
+  if (loading) {
+    return "загрузка";
+  }
+
   return (
-    <main>
+    <div className={styles.main}>
       <div className={styles.header}>
         <h1>Real Estate Rental Offers</h1>
         <div className={styles.priceBeds}>
@@ -30,31 +37,34 @@ return 'загрузка'
               icon={faMoneyCheckDollar}
               style={{ height: "20px" }}
             />
-            <button className={styles.priceButton}>
+            <button
+              className={styles.priceButton}
+              onClick={() => filter({ price: -1 })}
+            >
               <FontAwesomeIcon icon={faArrowUp} />
             </button>
-            <button className={styles.priceButton}>
-              
+            <button
+              className={styles.priceButton}
+              onClick={() => filter({ price: 1 })}
+            >
               <FontAwesomeIcon icon={faArrowDown} />
             </button>
           </div>
           <div className={styles.beds}>
-            <FontAwesomeIcon icon={faBed} />
-            <button className={styles.priceButton}>
-              <FontAwesomeIcon icon={faArrowUp} />
-            </button>
-            <button className={styles.priceButton}>
-              
-              <FontAwesomeIcon icon={faArrowDown} />
+            <button className={styles.favoritesUser}>
+              <i className="ri-bookmark-fill"></i>
             </button>
           </div>
         </div>
       </div>
 
-      <div className={styles.cards}>
-        <ImmovablesCard />
+      <div className={styles.cards} key={4}>
+        {" "}
+        {immovables.map((item) => {
+          return <ImmovablesCard {...item} key={item._id} />;
+        })}
       </div>
-    </main>
+    </div>
   );
 };
 
