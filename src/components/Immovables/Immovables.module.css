@@ -1,16 +1,16 @@
 .card {
+  margin-top: 8vh;
   width: 15rem;
   height: 20rem;
 }
-.card:hover .icons div{
-    color: rgb(27, 136, 15);
+.card:hover .icons div {
+  color: rgb(27, 136, 15);
 }
-.card:hover .card_text .link{
-    color: rgb(0, 34, 255);
+.card:hover .card_text .link {
+  color: rgb(0, 34, 255);
 }
-.card:hover{
-    box-shadow: 0 0 10px
-    rgba(0,0,0,.25);
+.card:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
 .image img {
   width: 15rem;
@@ -22,7 +22,7 @@
   border-bottom: 1px solid grey;
 }
 .icons {
-    margin-top: 10px;
+  margin-top: 10px;
   padding: 0 15px;
   width: 100%;
   display: flex;
@@ -86,55 +86,70 @@
   border-radius: 4px;
   cursor: pointer;
 }
-.more:hover{
-    background-color: #e6e6e6;
+.more:hover {
+  background-color: #e6e6e6;
 }
-main{
-    max-width: 75%;
-    border-color: red;
-    margin: auto;
-    margin-top: 80px;
+.main {
+  min-height: 100vh;
+  background: white;
+  width: 100%;
+  border-color: red;
+  margin: auto;
+  margin-top: 80px;
 }
-main .header{
-    margin-bottom: 50px;
+.main .header {
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  padding: 0 15%;
+}
+.cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 0 15%;
+}
+.priceButton {
+  border: none;
+  background-color: transparent;
+  transition: color 0.25s;
+  font-size: 20px;
+}
+.priceButton:hover {
+  color: rgb(27, 136, 15);
+}
+.price {
+  border-right: 1px solid gray;
+  padding: 0 5px;
+}
+.priceBeds {
+  display: flex;
+  align-items: center;
+}
+.beds {
+  padding: 0 10px;
+}
+.beds:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+}
+.price:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+}
+@media (max-width: 768px) {
+  .main .header {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 3px 5px
-    rgba(0,0,0,.10);
-    
+    justify-content: center;
+  }
+  .main .header h1 {
+    width: fit-content;
+    font-size: 1.25rem;
+  }
 }
-.cards{
-    display: flex;
-    justify-content: space-around;
-}
-.priceButton{
-    border: none;
-    background-color: transparent;
-    transition: color 0.25s;
-    font-size: 20px;
-   
-}
-.priceButton:hover{
-     color: rgb(27, 136, 15);
-}
-.price{
-    border-right: 1px solid gray;
-    padding: 0 5px;
-}
-.priceBeds{
-    display: flex;
-    align-items: center;
-}
-.beds{
-   padding: 0 10px;
-   
-}
-.beds:hover{
-    box-shadow: 0 0 5px
-    rgba(0,0,0,.25);
-}
-.price:hover{
-    box-shadow: 0 0 5px
-    rgba(0,0,0,.25);
+@media (min-width: 769px) {
+  .main .header {
+    font-size: 1rem;
+  }
 }
