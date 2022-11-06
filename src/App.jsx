@@ -1,4 +1,4 @@
-
+import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import ImmovablesCards from "./components/Immovables/ImmovablesCards";
 import InfoAbout from "./components/InfoAbout/InfoAbout";
@@ -9,6 +9,7 @@ function App() {
       <Header />
       <InfoAbout />
       <ImmovablesCards />
+      <Footer />
     </div>
   );
 }

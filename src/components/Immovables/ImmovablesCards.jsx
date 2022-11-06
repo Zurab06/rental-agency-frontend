@@ -3,16 +3,24 @@ import ImmovablesCard from "./ImmovablesCard";
 import styles from "./Immovables.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector, useDispatch } from "react-redux";
-import { immovablesFetch } from "./../../features/immovablesSlice";
+import {
+  fetchFavorites,
+  immovablesFetch,
+} from "./../../features/immovablesSlice";
+import Lottie from "lottie-react";
+import loader from "../animation/loader.json";
 import {
   faMoneyCheckDollar,
   faArrowUp,
   faArrowDown,
+  faRotateRight,
 } from "@fortawesome/free-solid-svg-icons";
 
 const ImmovablesCards = () => {
   const immovables = useSelector((state) => state.immovables.immovablesList);
   const loading = useSelector((state) => state.immovables.loading);
+  const token = useSelector((state) => state.user.token);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(immovablesFetch());
@@ -21,10 +29,9 @@ const ImmovablesCards = () => {
   function filter(filter) {
     dispatch(immovablesFetch(filter));
   }
-
-  if (loading) {
-    return "загрузка";
-  }
+  const loadFavorites = () => {
+    dispatch(fetchFavorites());
+  };
 
   return (
     <div className={styles.main}>
@@ -50,16 +57,27 @@ const ImmovablesCards = () => {
             </button>
           </div>
           <div className={styles.beds}>
-            <button className={styles.favoritesUser}>
+            <button
+              className={styles.favoritesUser}
+              onClick={loadFavorites}
+              disabled={token ? "" : true}
+            >
               <i className="ri-bookmark-fill"></i>
+            </button>
+            <button className={styles.favoritesUser} onClick={() => filter()}>
+              <FontAwesomeIcon icon={faRotateRight} />
             </button>
           </div>
         </div>
       </div>
       <div className={styles.cards} key={4}>
-        {immovables.map((item) => {
-          return <ImmovablesCard {...item} key={item._id} />;
-        })}
+        {loading ? (
+          <Lottie animationData={loader} style={{ margin: "auto" }} />
+        ) : (
+          immovables.map((item) => {
+            return <ImmovablesCard {...item} key={item._id} token={token} />;
+          })
+        )}
       </div>
     </div>
   );
