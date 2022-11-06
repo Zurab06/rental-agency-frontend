@@ -1,16 +1,16 @@
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
-import ImmovablesCards from "./components/Immovables/ImmovablesCards";
-import InfoAbout from "./components/InfoAbout/InfoAbout";
+import { Route, Routes } from "react-router-dom";
+import ImmovablesPage from "./components/ImmovablesPage/ImmovablesPage";
+import Layout from "./pages/Layout";
+import Main from "./pages/Main";
 
 function App() {
   return (
-    <div>
-      <Header />
-      <InfoAbout />
-      <ImmovablesCards />
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Main />} />
+        <Route path="/immovables/:id" element={<ImmovablesPage />} />
+      </Route>
+    </Routes>
   );
 }
 

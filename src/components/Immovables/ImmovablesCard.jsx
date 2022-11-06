@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import styles from "./Immovables.module.css";
 import { faBed, faCar, faCat, faBath } from "@fortawesome/free-solid-svg-icons";
-import "remixicon/fonts/remixicon.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "remixicon/fonts/remixicon.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorite } from "../../features/userSlice";
+import { Link } from "react-router-dom";
 
 const ImmovablesCard = (props) => {
   const favorites = useSelector((state) => state.user.favorites);
@@ -52,7 +53,9 @@ const ImmovablesCard = (props) => {
           </button>
         </div>
         <div>
-          <button className={styles.more}>More...</button>
+          <button className={styles.more}>
+            <Link to={`/immovables/${props._id}`}>More...</Link>
+          </button>
         </div>
       </div>
     </div>
