@@ -1,5 +1,6 @@
 .card {
-  margin-top: 8vh;
+  margin-top: 5rem;
+  margin-left: 1rem;
   width: 15rem;
   min-height: 20rem;
   transition: box-shadow 0.25s;
@@ -7,13 +8,13 @@
 .card:hover .icons div {
   color: rgb(27, 136, 15);
 }
-.card:hover .icons div{
+.card:hover .icons div {
   transition: color 0.25s;
 }
 .card:hover .card_text .link {
   color: rgb(0, 34, 255);
 }
-.card .card_text .link{
+.card .card_text .link {
   transition: color 0.25s;
 }
 .card:hover {
@@ -55,15 +56,27 @@
   cursor: pointer;
   transition: background-color 0.25s;
 }
+.button div .isfavorites {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  background-color: #fff;
+  color: #ed3f40;
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
 
-.button div .favorites:focus {
+.button div .favorites:hover {
   animation: scaleDown 0.5s ease-in-out;
 }
 .button div .favorites i {
   color: #777b9f;
   transform-origin: top;
 }
-.button div .favorites:focus i {
+.button div .favorites:hover i {
   animation: ribbon 0.25s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
 @keyframes ribbon {
@@ -94,6 +107,13 @@
   border-radius: 4px;
   cursor: pointer;
 }
+.more a {
+  text-decoration: none;
+  color: #3a3d52;
+}
+.more a:hover {
+  color: black;
+}
 .more:hover {
   background-color: #e6e6e6;
 }
@@ -115,9 +135,11 @@
   padding: 0 15%;
 }
 .cards {
+  box-sizing: border-box;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-wrap: wrap;
+  align-items: center;
   padding: 0 15%;
 }
 .priceButton {
@@ -144,6 +166,10 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
 }
 @media (max-width: 768px) {
+  .cards {
+    justify-content: center;
+    margin-left: 0;
+  }
   .main .header {
     display: flex;
     justify-content: center;
@@ -158,13 +184,12 @@
     font-size: 1rem;
   }
 }
-.favoritesUser{
+.favoritesUser {
   border: none;
   background-color: transparent;
   font-size: 20px;
   transition: color 0.25s;
 }
-.favoritesUser:hover{
+.favoritesUser:hover {
   color: #ed3f40;
 }
-

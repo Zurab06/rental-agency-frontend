@@ -35,8 +35,8 @@
 }
 .user_modal {
   display: flex;
+  justify-content: flex-start;
   flex-direction: column;
-  justify-content: space-between;
   background: white;
   min-width: 25rem;
   min-height: 25rem;
@@ -58,13 +58,78 @@
   flex-direction: column;
   padding: 10px;
 }
-.user_footer {
+.info_user {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+}
+.info_user span {
+  padding: 10px;
+}
+.info_order {
+  display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+.info_title {
+  font-size: larger;
+  width: 100%;
+  color: gold;
+  text-align: center;
+  border-bottom: 1px solid black;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+  margin-bottom: 10px;
+}
+.show_info {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.info_more {
+  flex-direction: column;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+}
+.icons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+}
+.btn_info {
+  border: none;
+  background: none;
+  width: 50%;
+  margin: auto;
+  border: 1px solid rgba(224, 224, 224, 1);
+}
+.btn_info a {
+  text-decoration: none;
+  color: black;
+}
+.btn_info:hover {
+  background-color: rgb(191, 188, 188);
+}
+.icons div {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.user_footer {
+  font-size: small;
+  margin-bottom: 0;
+  margin-top: auto;
+  display: flex;
+  justify-content: space-around;
+  background-color: black;
+  color: white;
+  align-items: center;
+  height: 2rem;
 }
 .user_footer span {
+  width: fit-content;
+
   cursor: pointer;
   padding: 0.1rem;
   margin-bottom: 0.5rem;
@@ -72,12 +137,12 @@
 .user_footer span:hover {
   color: rgba(207, 0, 0, 0.8);
   text-shadow: 0px 0px 5px rgba(255, 0, 0, 0.8);
+  font-size: medium;
 }
 @media (max-width: 768px) {
   .user_modal {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     background: white;
     min-width: 18rem;
     min-height: 25rem;
@@ -87,7 +152,6 @@
   .user_modal {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     background: white;
     min-width: 25rem;
     min-height: 25rem;

@@ -11,7 +11,7 @@ const InfoAbout = () => {
           <h3>
             We provide holiday property rental services.
             <br />
-            We are the best choice for your holiday.
+            CRUD is the best choise you can have.
           </h3>
           <h6>
             Ахч дез. <FontAwesomeIcon icon={faHouse} />
