@@ -1,0 +1,9 @@
+.container {
+    margin-top: 600px;
+    margin-left: 200px;
+    background-color: azure;
+    width: 25%;
+    opacity: 0.9;
+    padding: 10px;
+    border-radius: 4px;
+}
