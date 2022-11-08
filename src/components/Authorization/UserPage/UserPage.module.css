@@ -1,4 +1,5 @@
 .main {
+  position: relative;
   background-color: black;
   border: 1px solid;
   padding: 10px;
@@ -15,115 +16,144 @@
   background: white;
   border-radius: 50%;
   cursor: pointer;
-  position: relative;
 }
 
 .user_logo_img {
   width: 80%;
   height: 80%;
 }
-.auth_modal {
-  border: 1px solid;
-  position: absolute;
-  padding: 5px;
-  background-color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: fit-content;
-  flex-direction: column;
-}
-
-.modal_header {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-.modal_header button {
+.modal_background {
+  backdrop-filter: blur(2px);
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  left: 90%;
-  width: 1.5rem;
-  height: 1.5rem;
-  padding: 1rem;
-  border-radius: 50%;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
+  top: 0;
+  left: 0;
 }
-.modal_header button:hover {
-  color: rgb(186, 20, 20);
-}
-
-.modal_body {
-  width: 100%;
+.user_modal {
   display: flex;
+  justify-content: flex-start;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  background: white;
+  min-width: 25rem;
+  min-height: 25rem;
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
-.inp_auth {
-  outline: 0ch;
-  border: 0;
-  width: 90%;
-  margin-bottom: 10px;
-  padding: 2px;
-  border-bottom: 1px solid gray;
-}
-.inp_auth input {
-  border: 0ch;
-  outline: 0;
-  width: 100%;
-}
-.modal_footer {
-  display: flex;
-  justify-content: space-between;
-  width: 90%;
-}
-
-.btn_reset {
-  border: 1px solid;
-  border-radius: 10px;
-  padding: 3px;
-  background: transparent;
-  color: rgb(0, 85, 255);
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.btn_submit {
-  border: 1px solid;
-  border-radius: 10px;
-  padding: 3px;
-  background: rgb(0, 85, 255);
+.user_header {
+  background: rgb(1, 74, 1);
   color: white;
-  font-weight: 700;
-  cursor: pointer;
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.singUp {
+
+.user_body {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.info_user {
+  display: flex;
+  justify-content: flex-start;
+}
+.info_user span {
+  padding: 10px;
+}
+.info_order {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+.info_title {
+  font-size: larger;
+  width: 100%;
+  color: gold;
+  text-align: center;
+  border-bottom: 1px solid black;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+  margin-bottom: 10px;
+}
+.show_info {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.info_more {
+  flex-direction: column;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+}
+.icons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+}
+.btn_info {
+  border: none;
+  background: none;
+  width: 50%;
+  margin: auto;
+  border: 1px solid rgba(224, 224, 224, 1);
+}
+.btn_info a {
+  text-decoration: none;
+  color: black;
+}
+.btn_info:hover {
+  background-color: rgb(191, 188, 188);
+}
+.icons div {
+  margin-left: 10px;
   margin-top: 10px;
 }
-.singUp a {
-  color: rgb(0, 85, 255);
+.user_footer {
+  font-size: small;
+  margin-bottom: 0;
+  margin-top: auto;
+  display: flex;
+  justify-content: space-around;
+  background-color: black;
+  color: white;
+  align-items: center;
+  height: 2rem;
 }
-.modal_footer button {
-  width: 40%;
-}
-.singUp {
+.user_footer span {
+  width: fit-content;
+
   cursor: pointer;
-  color: rgb(0, 85, 255);
+  padding: 0.1rem;
+  margin-bottom: 0.5rem;
+}
+.user_footer span:hover {
+  color: rgba(207, 0, 0, 0.8);
+  text-shadow: 0px 0px 5px rgba(255, 0, 0, 0.8);
+  font-size: medium;
 }
 @media (max-width: 768px) {
-  .auth_modal {
-    width: 70vw;
+  .user_modal {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    min-width: 18rem;
+    min-height: 25rem;
   }
 }
 @media (min-width: 769px) {
-  .auth_modal {
-    width: 33vw;
+  .user_modal {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    min-width: 25rem;
+    min-height: 25rem;
   }
 }

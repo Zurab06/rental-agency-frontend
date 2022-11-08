@@ -1,47 +1,37 @@
-
 import { addReview, getComments } from "../../features/commentSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@mui/material";
 import { useParams } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
-// import play from "./play.module.sass";
 import { useState } from "react";
 import React from "react";
-import styles from './Comments.module.css'
+import styles from "./Comments.module.css";
 import { useEffect } from "react";
 
 const Comments = () => {
-
-  // Для input
-  const [review, setReview] = useState("");
-
-  // Для input-а звезд
-  const [star, setStars] = useState(5);
-
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getComments());
+  }, []);
   const { id } = useParams();
 
- useEffect(()=> {
-  dispatch(getComments())
- }, [])
-  
- const comments = useSelector((state)=> state.comments.comments)
- console.log(comments)
-  // Забираем именно нужное нам место с помощью find
-  // const playground = useSelector((state) =>
-  //   state.playground.playgrounds.find((item) => item._id === id)
-  // );
-  // const loading = useSelector((state) => state.playground.loading);
+  const loading = useSelector(state => state.comments.loading)
 
-  //Суммируем все оценки
-  // let rating_1 = 0;
-  // for (let item of playground.reviews) {
-  //   rating_1 += item.stars;
-  // }
-  //Находим среднюю оценку
-  // const rating = rating_1 / playground.reviews.length;
+  const commentList = useSelector(state => state.comments.comments.filter(item => item.reviewToPost._id === id))
+  // Для input
+  const [review, setReview] = useState("");
   
+  // Для input-а звезд
+  const [star, setStars] = useState(5);
+  
+  // if(!commentList) {
+  //   return 'Loading'
+  // }
+
+  // if(loading){
+  //   return ''
+  // }
 
   const handleReview = (e) => {
     setReview(e.target.value);
@@ -49,59 +39,60 @@ const Comments = () => {
 
   const handleAddReview = () => {
     dispatch(addReview({ review, star, id }));
+    dispatch(getComments())
     setReview("");
   };
- 
-    return (
-      <div className={styles.container}>
-        <div>
-          <h2>Отзывы</h2>
-        </div>
-        {comments.map(el=> {
-          return (
-            <div key={el._id}>
-              <div>{el.text}</div>
-            </div>
-          )
-        })}
-        <div className={styles.content}>
-          {
-              }
-        </div>
-        <div className={styles.starsAndInputReview}>
-          <span>Ваша оценка</span>
-          <Stack spacing={1}>
+
+  return (
+    <div className={styles.container}>
+      <div>
+        <h2>Reviews</h2>
+      </div>
+      {commentList.map((el) => {
+        return (
+        
+          <div key={el._id}>
+            <div className={styles.comment}>{el.text}
             <Rating
-              name="half-rating"
-              // defaultValue={rating}
-              precision={0.5}
-              onChange={(event) => setStars(event.target.value)}
-            />
-          </Stack>
-          <span>Ваш отзыв</span>
-          <div className={styles.inputAndButton}>
-            <input
-              className={styles.inputReview}
-              id="outlined-basic"
-              label="Отзыв"
-             
-              value={review}
-              onChange={handleReview}
-            />
-            <Button
-              className={styles.button}
-              variant="contained"
-              href="#contained-buttons"
-              onClick={handleAddReview}
-              disabled={!review}
-            >
-              Добавить
-            </Button>
+            name="rating"
+            // defaultValue={rating}
+            precision={0.5} readOnly
+            value={el.stars}
+          /></div>
+            
           </div>
+        );
+      })}
+      
+      <div className={styles.starsAndInputReview}>
+        <span>Tap a star to rate </span>
+        <Stack spacing={1}>
+          <Rating
+            precision={0.5}
+            onChange={(event) => setStars(event.target.value)}
+          />
+        </Stack>
+        <span>Your review</span>
+        <div className={styles.inputAndButton}>
+          <input
+            className={styles.inputReview}
+            id="outlined-basic"
+            label="Отзыв"
+            value={review}
+            onChange={handleReview}
+          />
+          <Button
+            className={styles.button}
+            variant="contained"
+            onClick={handleAddReview}
+            disabled={!review}
+          >
+            Add
+          </Button>
         </div>
       </div>
-    );
-  
+    </div>
+  );
 };
 
 export default Comments;

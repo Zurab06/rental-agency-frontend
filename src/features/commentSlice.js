@@ -7,6 +7,10 @@ export const getComments = createAsyncThunk(
         try {
             const response = await fetch("http://localhost:3001/comments")
             const data = await response.json()
+
+            if(data.error) {
+              return thunkAPI.rejectWithValue(data.error)
+            }
             return data
         } catch (error) {
             return thunkAPI.rejectWithValue(error)
@@ -14,26 +18,26 @@ export const getComments = createAsyncThunk(
     }
 )
 
+
 export const addReview = createAsyncThunk(
     "review/addReview",
     async ({ star, review, id }, thunkAPI) => {
       try {
         const response = await fetch(
-          `http://localhost:3001/review/playground/${id}`,
+          `http://localhost:3001/comments/${id}`,
           {
-            method: "PATCH",
+            method: "POST",
             headers: {
               "Content-Type": "application/json",
             //   Authorization: `Bearer ${thunkAPI.getState().auth.token}`,
             },
-            body: JSON.stringify({ star, review }),
+            body: JSON.stringify({ stars: star, text: review }),
           }
         );
         const data = await response.json();
-        // if (data.error) {
-        //   toast.error(data.error);
-        //   return thunkAPI.rejectWithValue(data.error);
-        // }
+        if (data.error) {
+          return thunkAPI.rejectWithValue(data.error);
+        }
         return thunkAPI.fulfillWithValue(data);
       } catch (error) {
         return thunkAPI.rejectWithValue(error);
@@ -47,12 +51,11 @@ export const addReview = createAsyncThunk(
       loading: false,
       error: null,
       success: false,
-      comments: ['review1','review2','review3'],
+      comments: [],
     },
     reducers: {},
     extraReducers: (builder) => {
       builder
-
         .addCase(addReview.pending, (state) => {
           state.loading = true;
         })
@@ -61,7 +64,7 @@ export const addReview = createAsyncThunk(
           state.loading = false;
         })
         .addCase(addReview.fulfilled, (state, action) => {
-          state.playgrounds = state.comments.map((item) => {
+          state.comments = state.comments.map((item) => {
             if (item._id === action.payload._id) {
               return action.payload;
             }
@@ -79,7 +82,7 @@ export const addReview = createAsyncThunk(
             state.loading = true
         })
         .addCase(getComments.rejected, (state, action)=> {
-            state.loading = true
+            state.loading = false
             state.error = state.action
         })
   

@@ -1,4 +1,5 @@
 .main {
+  position: relative;
   background-color: black;
   border: 1px solid;
   padding: 10px;
@@ -15,115 +16,124 @@
   background: white;
   border-radius: 50%;
   cursor: pointer;
-  position: relative;
 }
 
 .user_logo_img {
   width: 80%;
   height: 80%;
 }
+.modal_background {
+  backdrop-filter: blur(2px);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 .auth_modal {
-  border: 1px solid;
-  position: absolute;
-  padding: 5px;
-  background-color: white;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: fit-content;
   flex-direction: column;
+  justify-content: space-between;
+  background: white;
+  min-width: 25rem;
+  min-height: 25rem;
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
-.modal_header {
-  position: relative;
+.auth_header {
   width: 100%;
+  height: 3rem;
   display: flex;
-  justify-content: center;
+  background: grey;
 }
-.modal_header button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  left: 90%;
-  width: 1.5rem;
-  height: 1.5rem;
-  padding: 1rem;
-  border-radius: 50%;
+
+.btn_auth_active {
+  background: rgba(224, 224, 224, 1);
+  width: 50%;
+  height: 100%;
   border: none;
-  background-color: transparent;
-  cursor: pointer;
 }
-.modal_header button:hover {
-  color: rgb(186, 20, 20);
+.btn_auth {
+  width: 50%;
+  height: 100%;
+  border: none;
+  background: white;
 }
-
-.modal_body {
-  width: 100%;
+.btn_auth:hover {
+  background: rgba(224, 224, 224, 1);
+}
+.auth_body {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  padding: 10px;
 }
 
-.inp_auth {
-  outline: 0ch;
-  border: 0;
-  width: 90%;
-  margin-bottom: 10px;
-  padding: 2px;
-  border-bottom: 1px solid gray;
-}
-.inp_auth input {
-  border: 0ch;
-  outline: 0;
-  width: 100%;
-}
-.modal_footer {
+.inputs {
+  background: none;
+  border: 1px solid rgba(224, 224, 224, 1);
   display: flex;
-  justify-content: space-between;
-  width: 90%;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 0.5rem;
 }
-
-.btn_reset {
-  border: 1px solid;
-  border-radius: 10px;
-  padding: 3px;
-  background: transparent;
-  color: rgb(0, 85, 255);
-  font-weight: 700;
-  cursor: pointer;
+.inputs input {
+  height: 2rem;
+  width: 80%;
+  outline: none;
+  background-color: white !important;
+  border: 0;
+  border-radius: 0;
+  margin-left: 5%;
 }
-
-.btn_submit {
-  border: 1px solid;
-  border-radius: 10px;
-  padding: 3px;
-  background: rgb(0, 85, 255);
+.auth_footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.auth_footer button {
+  background-color: rgba(2, 109, 50, 1);
   color: white;
-  font-weight: 700;
+  border-radius: 1rem;
+  height: 2.5rem;
+  width: 90%;
+  border: none;
   cursor: pointer;
+  margin-bottom: 1rem;
 }
-.singUp {
-  margin-top: 10px;
+.auth_footer button:hover {
+  background-color: rgb(0, 137, 62);
+  box-shadow: 0px 0px 10px 0px rgb(1, 180, 82);
 }
-.singUp a {
-  color: rgb(0, 85, 255);
-}
-.modal_footer button {
-  width: 40%;
-}
-.singUp {
+.auth_footer span {
   cursor: pointer;
-  color: rgb(0, 85, 255);
+  padding: 0.1rem;
+  margin-bottom: 0.5rem;
+}
+.auth_footer span:hover {
+  color: rgba(2, 109, 50, 0.8);
 }
 @media (max-width: 768px) {
   .auth_modal {
-    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: white;
+    min-width: 18rem;
+    min-height: 25rem;
   }
 }
 @media (min-width: 769px) {
   .auth_modal {
-    width: 33vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: white;
+    min-width: 25rem;
+    min-height: 25rem;
   }
 }

@@ -4,12 +4,13 @@ import logo from "../images/Logo_black.png";
 import Authorization from "../Authorization/Authorization";
 import Lottie from "lottie-react";
 import forest from "../animation/forest.json";
+import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <div className={styles.main}>
-      <div className={styles.logo_bar}>
+      <Link to="/" className={styles.logo_bar}>
         <img src={logo} alt="" className={styles.logo}></img>
-      </div>
+      </Link>
       <div className={styles.center}>
         <Lottie
           animationData={forest}
