@@ -6,7 +6,8 @@
   align-items: center;
   background: white;
   min-height: 7.5vh;
-  width: 100vw;
+  width: 100%;
+  z-index: 5;
 }
 .logo_bar {
   display: flex;
