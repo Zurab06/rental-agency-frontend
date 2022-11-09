@@ -29,6 +29,9 @@ const UserPage = () => {
     dispatch(getInfoAboutUser());
   }, [dispatch]);
 
+  if (user.loading && immovables.loading) {
+    return "";
+  }
   const handleRemoveOrder = (id) => {
     dispatch(removeOrder(id));
     dispatch(getInfoAboutUser());
@@ -42,10 +45,6 @@ const UserPage = () => {
       dispatch(fetchImmovablesById(id._id));
     }
   };
-
-  if (user.loading && immovables.loading) {
-    return "";
-  }
   return (
     <>
       <div className={styles.user_logo} onClick={() => handleShow(user.order)}>
@@ -62,9 +61,25 @@ const UserPage = () => {
                 <img
                   src="https://www.meme-arsenal.com/memes/29fc6b5c40ed07718cc2f8e58b375296.jpg"
                   alt="ты"
-                  style={{ width: "6rem", height: "6rem" }}
+                  style={{
+                    width: "6.5rem",
+                    height: "6.5rem",
+                    borderRadius: "1rem",
+                    background: "black",
+                    padding: "0.1rem",
+                  }}
                 ></img>
-                <span>welcome, {user.nickname}, pleasant cooperation!</span>
+                <span
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                  }}
+                >
+                  <b>Welcome to our team,{user.nickname}.</b>
+                  We look forward to productive cooperation!
+                </span>
               </div>
               <div className={styles.info_order}>
                 <span className={styles.info_title}>YOUR ORDER: </span>
@@ -73,12 +88,20 @@ const UserPage = () => {
                     <div className={styles.show_info}>
                       <img
                         src={`http://localhost:3001/${immovables.immovablesById.image[0]}`}
-                        style={{ width: "8rem", height: "6rem" }}
+                        style={{
+                          width: "8rem",
+                          height: "6rem",
+                          borderRadius: "1rem",
+                        }}
                         alt=""
                       ></img>
                       <div className={styles.info_more}>
-                        <h5>{user.order.name} </h5>
-                        <div>
+                        <div className={styles.order_name}>
+                          <div>name:</div>
+                          <div>{user.order.name}</div>
+                        </div>
+                        <div className={styles.order_options}>
+                          <div>options: </div>
                           <div className={styles.icons}>
                             <div>
                               <FontAwesomeIcon icon={faBed} />{" "}
@@ -95,6 +118,14 @@ const UserPage = () => {
                             <div>
                               <FontAwesomeIcon icon={faCat} /> <span>Yes</span>
                             </div>
+                          </div>
+                        </div>
+                        <div className={styles.order_name}>
+                          <div>date:</div>
+                          <div>
+                            {user.orderDate.start +
+                              "    to   " +
+                              user.orderDate.end}
                           </div>
                         </div>
                       </div>

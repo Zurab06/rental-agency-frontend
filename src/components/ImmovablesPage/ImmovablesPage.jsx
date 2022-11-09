@@ -32,6 +32,25 @@ const ImmovablesPage = () => {
   );
   const user = useSelector((state) => state.user);
 
+  const now = new Date();
+  const today = {
+    dd: now.getDate() + 1,
+    mm: now.getMonth() + 1,
+    yyyy: now.getFullYear(),
+  };
+  today.dd = today.dd < 10 ? "0" + today.dd : today.dd;
+  today.mm = today.mm < 10 ? "0" + today.mm : today.mm;
+
+  const rentDate = `${today.yyyy}-${today.mm}-${today.dd}`;
+  const [startDate, setStartDate] = useState(
+    !!immovablesById.freeToOrder ? immovablesById.freeToOrder : rentDate
+  );
+  const [endDate, setEndDate] = useState(
+    !!immovablesById.freeToOrder ? immovablesById.freeToOrder : rentDate
+  );
+  const [minDate, setMinDate] = useState(
+    !!immovablesById.freeToOrder ? immovablesById.freeToOrder : rentDate
+  );
   useEffect(() => {
     dispatch(fetchImmovablesById(id));
     dispatch(getInfoAboutUser());
@@ -54,12 +73,12 @@ const ImmovablesPage = () => {
       }
     }
   };
-
-  const handleOrder = (id) => {
+  const handleOrder = (id, orderStart, orderEnd) => {
     if (!!!user.order) {
-      dispatch(getOrder(id));
+      dispatch(getOrder({ id, orderStart, orderEnd }));
       dispatch(fetchImmovablesById(id));
       dispatch(getInfoAboutUser());
+      setMinDate(endDate);
     }
     dispatch(fetchImmovablesById(id));
     dispatch(getInfoAboutUser());
@@ -122,29 +141,38 @@ const ImmovablesPage = () => {
                 <FontAwesomeIcon icon={faCat} /> <span>Yes</span>
               </div>
             </div>
-            <button
-              className={styles.rent}
-              onClick={() => handleOrder(id)}
-              disabled={immovablesById.isOwner || user.order ? true : ""}
-            >
-              {immovablesById.isOwner || user.order
-                ? "Already in order"
-                : "Rent"}
-            </button>
+            <div className={styles.date}>
+              <input
+                type="date"
+                min={minDate}
+                value={startDate}
+                onChange={(e) => {
+                  setStartDate(e.target.value);
+                }}
+              ></input>
+              <input
+                type="date"
+                name="trip-start"
+                value={endDate}
+                min={startDate}
+                onChange={(e) => {
+                  setEndDate(e.target.value);
+                }}
+              ></input>
+              <button
+                onClick={() =>
+                  handleOrder(immovablesById._id, startDate, endDate)
+                }
+                disabled={user.token ? "" : true}
+              >
+                claim order
+              </button>
+            </div>
           </div>
         </div>
         <div className={styles.description}>
           <h3>Description</h3>
-          <h6 className={styles.text}>
-            Years seed fruit you. Divided morning sea day Set earth. Grass
-            without cattle. Spirit heaven. Also i grass give fowl wherein cattle
-            spirit whales rule cattle. Earth fowl given own youre, fruit so.
-            Shall was. Called firmament dry fruitful, set place. Earth given
-            female man fruit, under thing may to greater moveth land sea, great
-            be shall living greater and signs place night after whose us one,
-            youll second our set had day in greater divided over female first
-            face, fill form
-          </h6>
+          <h6 className={styles.text}>{immovablesById.description}</h6>
         </div>
         <div className={styles.location}>
           <div className={styles.place}>
