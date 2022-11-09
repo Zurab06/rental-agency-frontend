@@ -1,0 +1,19 @@
+.container {
+    margin-top: 60px;
+    background-color: rgb(150, 160, 160);
+    width: 70%;
+    opacity: 0.9;
+    padding: 10px;
+    border-radius: 4px;
+}
+.comment{
+    padding: 4px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #C0C0C0;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow-x: visible;
+}

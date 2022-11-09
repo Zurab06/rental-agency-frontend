@@ -19,10 +19,13 @@ import loader from "../animation/loader.json";
 import { useState } from "react";
 import { getInfoAboutUser, getOrder } from "../../features/userSlice";
 
+
+
 const ImmovablesPage = () => {
   const dispatch = useDispatch();
   const [img, setImg] = useState(0);
   const id = useParams().id;
+  
   const loading = useSelector((state) => state.immovables.loading);
   const immovablesById = useSelector(
     (state) => state.immovables.immovablesById
