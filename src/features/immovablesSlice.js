@@ -3,7 +3,28 @@ const initialState = {
   immovablesList: [],
   loading: true,
   error: null,
+  immovablesById: {},
 };
+export const fetchImmovablesById = createAsyncThunk(
+  "immovablesById/fetch",
+  async (id, thunkAPI) => {
+    try {
+      const res = await fetch(`http://localhost:3001/immovables/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      if (data.error) {
+        return thunkAPI.rejectWithValue(data.error);
+      }
+      return data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
 export const immovablesFetch = createAsyncThunk(
   "immovables/option",
   async (filter, thunkAPI) => {
@@ -77,6 +98,17 @@ export const immovablesSlice = createSlice({
       .addCase(fetchFavorites.fulfilled, (state, action) => {
         state.loading = false;
         state.immovablesList = action.payload;
+      })
+      .addCase(fetchImmovablesById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.error;
+      })
+      .addCase(fetchImmovablesById.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(fetchImmovablesById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.immovablesById = action.payload;
       });
   },
 });

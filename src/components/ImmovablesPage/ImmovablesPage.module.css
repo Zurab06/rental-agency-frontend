@@ -6,4 +6,175 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  min-height: 95vh;
+  padding-top: 9.5vh;
+  padding-bottom: 3vh;
+  user-select: none;
+}
+.image {
+  width: 60vw;
+  height: 30vw;
+}
+.header {
+  width: 50%;
+  margin-top: 5vh;
+  border-bottom: 1px solid;
+  padding-bottom: 30px;
+}
+.name_price {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+.icons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid;
+  padding-top: 1rem;
+}
+.date {
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.date input {
+  margin: 1rem;
+  border-radius: 1rem;
+  padding: 0.1rem 0.25rem;
+}
+.date button {
+  border: 1px solid grey;
+  background: white;
+  border-radius: 1rem;
+  padding: 0 100px;
+}
+.icons div {
+  width: fit-content;
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icons div:hover {
+  color: rgb(3, 135, 3);
+}
+.icons div span {
+  margin-left: 10px;
+}
+.description {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 25px;
+}
+.text {
+  margin-top: 15px;
+  border-bottom: 1px solid;
+  padding-bottom: 30px;
+}
+.location {
+  width: 50%;
+  padding-top: 30px;
+}
+.place {
+  display: flex;
+  justify-content: space-between;
+}
+.yandex_map {
+  height: 50vh;
+}
+.Carousel {
+  margin-top: 15%;
+  background-color: rgb(211, 211, 211);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+}
+.icon {
+  height: 100%;
+  font-size: 50px;
+  opacity: 0.5;
+  transition: opacity;
+  cursor: pointer;
+  height: 100%;
+}
+.icon:hover {
+  opacity: 1;
+  transition: 0.25s linear;
+}
+.rent {
+  margin-left: auto;
+  margin-right: 0;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(185, 185, 185);
+}
+.rent:hover {
+  background: rgba(170, 170, 170, 0.5);
+  color: black;
+}
+@media (max-width: 768px) {
+  .Carousel {
+    margin-top: 15vh;
+    background-color: rgb(211, 211, 211);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+  }
+  .image {
+    width: 60vw;
+    height: 30vw;
+  }
+  .date input,
+  .date button {
+    margin: 1rem;
+    border-radius: 1rem;
+    padding: 0.1rem 0.25rem;
+  }
+  .date button {
+    width: 90%;
+
+    padding: 0 1rem;
+  }
+}
+@media (min-width: 769px) {
+  .image {
+    width: 50vw;
+    height: 30vw;
+  }
+  .Carousel {
+    margin: 10vh;
+    background-color: rgb(211, 211, 211);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+  }
+  .date input,
+  .date button {
+    margin: 1rem;
+    border-radius: 1rem;
+    padding: 0.1rem 0.25rem;
+  }
+  .date button {
+    padding: 0 1rem;
+  }
 }

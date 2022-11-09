@@ -5,6 +5,10 @@ const initialState = {
   loading: false,
   nickname: false,
   order: "",
+  orderDate: {
+    start: "",
+    end: "",
+  },
   error: false,
   signIn: false,
   signUp: false,
@@ -76,6 +80,52 @@ export const getInfoAboutUser = createAsyncThunk(
   }
 );
 
+export const getOrder = createAsyncThunk(
+  "orderUser/fetch",
+  async ({ id, orderStart, orderEnd }, thunkAPI) => {
+    const token = thunkAPI.getState().user.token;
+    try {
+      const res = await fetch("http://localhost:3001/users/order", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ id, orderStart, orderEnd }),
+      });
+      const data = await res.json();
+      if (data.error) {
+        return thunkAPI.rejectWithValue(data.error);
+      }
+      return data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+export const removeOrder = createAsyncThunk(
+  "removeorderUser/fetch",
+  async (id, thunkAPI) => {
+    const token = thunkAPI.getState().user.token;
+    try {
+      const res = await fetch("http://localhost:3001/users/order/delete", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ id }),
+      });
+      const data = await res.json();
+      if (data.error) {
+        return thunkAPI.rejectWithValue(data.error);
+      }
+      return data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
 export const addFavorite = createAsyncThunk(
   "user/patch",
   async (favorite, thunkAPI) => {
@@ -107,6 +157,7 @@ export const userSlice = createSlice({
     userLogout: (state, action) => {
       localStorage.removeItem("token");
       state.token = null;
+      state.favorites = [];
     },
   },
   extraReducers: (builder) => {
@@ -152,6 +203,21 @@ export const userSlice = createSlice({
       .addCase(getInfoAboutUser.fulfilled, (state, action) => {
         state.nickname = action.payload.nickname;
         state.order = action.payload.order;
+        state.orderDate = action.payload.orderDate;
+      })
+      .addCase(getOrder.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getOrder.fulfilled, (state, action) => {
+        state.loading = false;
+        state.order = action.payload.data.order;
+      })
+      .addCase(removeOrder.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(removeOrder.fulfilled, (state, action) => {
+        state.loading = false;
+        state.order = null;
       });
   },
 });

@@ -6,6 +6,7 @@ import "remixicon/fonts/remixicon.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorite } from "../../features/userSlice";
 import { Link } from "react-router-dom";
+import { fetchImmovablesById } from "../../features/immovablesSlice";
 
 const ImmovablesCard = (props) => {
   const favorites = useSelector((state) => state.user.favorites);
@@ -13,6 +14,9 @@ const ImmovablesCard = (props) => {
   function addUserFavorite(favorite) {
     dispatch(addFavorite(favorite));
   }
+  const handleImmovablesById = (id) => {
+    dispatch(fetchImmovablesById(id));
+  };
   useEffect(() => {
     if (localStorage.getItem("token")) {
       dispatch(addFavorite());
@@ -53,7 +57,12 @@ const ImmovablesCard = (props) => {
           </button>
         </div>
         <div>
-          <button className={styles.more}>
+          <button
+            className={styles.more}
+            onClick={() => {
+              handleImmovablesById(props._id);
+            }}
+          >
             <Link to={`/immovables/${props._id}`}>More...</Link>
           </button>
         </div>
