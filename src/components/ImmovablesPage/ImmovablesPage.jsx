@@ -1,15 +1,201 @@
 import React from "react";
 import styles from "./ImmovablesPage.module.css";
+import { YMaps, Map, Placemark } from "react-yandex-maps";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBed,
+  faCar,
+  faCat,
+  faBath,
+  faAngleRight,
+  faAngleLeft,
+} from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchImmovablesById } from "../../features/immovablesSlice";
+import { useParams } from "react-router-dom";
+import Lottie from "lottie-react";
+import loader from "../animation/loader.json";
+import { useState } from "react";
+import { getInfoAboutUser, getOrder } from "../../features/userSlice";
 
 const ImmovablesPage = () => {
+  const dispatch = useDispatch();
+  const [img, setImg] = useState(0);
+  const id = useParams().id;
+  const loading = useSelector((state) => state.immovables.loading);
+  const immovablesById = useSelector(
+    (state) => state.immovables.immovablesById
+  );
+  const location = useSelector(
+    (state) => state.immovables.immovablesById.location
+  );
+  const user = useSelector((state) => state.user);
+
+  const now = new Date();
+  const today = {
+    dd: now.getDate() + 1,
+    mm: now.getMonth() + 1,
+    yyyy: now.getFullYear(),
+  };
+  today.dd = today.dd < 10 ? "0" + today.dd : today.dd;
+  today.mm = today.mm < 10 ? "0" + today.mm : today.mm;
+
+  const rentDate = `${today.yyyy}-${today.mm}-${today.dd}`;
+  const [startDate, setStartDate] = useState(
+    !!immovablesById.freeToOrder ? immovablesById.freeToOrder : rentDate
+  );
+  const [endDate, setEndDate] = useState(
+    !!immovablesById.freeToOrder ? immovablesById.freeToOrder : rentDate
+  );
+  const [minDate, setMinDate] = useState(
+    !!immovablesById.freeToOrder ? immovablesById.freeToOrder : rentDate
+  );
+  useEffect(() => {
+    dispatch(fetchImmovablesById(id));
+    dispatch(getInfoAboutUser());
+  }, [dispatch, id]);
+
+  const changeImage = (type) => {
+    if (type === "dec") {
+      if (img === 0) {
+        const newImg = immovablesById.image.length;
+        setImg(newImg - 1);
+      } else {
+        setImg(img - 1);
+      }
+    }
+    if (type === "inc") {
+      if (img === immovablesById.image.length - 1) {
+        setImg(0);
+      } else {
+        setImg(img + 1);
+      }
+    }
+  };
+  const handleOrder = (id, orderStart, orderEnd) => {
+    if (!!!user.order) {
+      dispatch(getOrder({ id, orderStart, orderEnd }));
+      dispatch(fetchImmovablesById(id));
+      dispatch(getInfoAboutUser());
+      setMinDate(endDate);
+    }
+    dispatch(fetchImmovablesById(id));
+    dispatch(getInfoAboutUser());
+  };
+
+  if (loading) {
+    return (
+      <div className={styles.main}>
+        <Lottie animationData={loader} style={{ margin: "auto" }} />
+      </div>
+    );
+  }
+
   return (
     <div className={styles.main}>
-      <img
-        src="https://media.tenor.com/NZqiUoAnAFsAAAAC/cat-computer.gif"
-        alt="я джифка"
-      />
-      <div>Ассадин и Зураб активно работают над этой страницей..</div>
-      <div>или нет...</div>
+      <>
+        <div className={styles.Carousel}>
+          <div
+            className={styles.icon}
+            onClick={() => {
+              changeImage("dec");
+            }}
+          >
+            <FontAwesomeIcon icon={faAngleLeft} />
+          </div>
+          <img
+            src={`http://localhost:3001/${immovablesById.image[img]}`}
+            alt=""
+            className={styles.image}
+          ></img>
+          <div
+            className={styles.icon}
+            onClick={() => {
+              changeImage("inc");
+            }}
+          >
+            <FontAwesomeIcon icon={faAngleRight} />
+          </div>
+        </div>
+        <div className={styles.header}>
+          <div className={styles.name_price}>
+            <h5>{immovablesById.name}</h5>
+            <h5>${immovablesById.price}/w</h5>
+          </div>
+          <div className={styles.icons}>
+            <div>
+              <div>
+                <FontAwesomeIcon icon={faBed} />
+                <span>{immovablesById.options.Baths}</span>
+              </div>
+              <div>
+                <FontAwesomeIcon icon={faCar} />
+                <span>{immovablesById.options.Garage}</span>
+              </div>
+              <div>
+                <FontAwesomeIcon icon={faBath} />
+                <span>{immovablesById.options.Beds}</span>
+              </div>
+              <div>
+                <FontAwesomeIcon icon={faCat} /> <span>Yes</span>
+              </div>
+            </div>
+            <div className={styles.date}>
+              <input
+                type="date"
+                min={minDate}
+                value={startDate}
+                onChange={(e) => {
+                  setStartDate(e.target.value);
+                }}
+              ></input>
+              <input
+                type="date"
+                name="trip-start"
+                value={endDate}
+                min={startDate}
+                onChange={(e) => {
+                  setEndDate(e.target.value);
+                }}
+              ></input>
+              <button
+                onClick={() =>
+                  handleOrder(immovablesById._id, startDate, endDate)
+                }
+                disabled={user.token ? "" : true}
+              >
+                claim order
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className={styles.description}>
+          <h3>Description</h3>
+          <h6 className={styles.text}>{immovablesById.description}</h6>
+        </div>
+        <div className={styles.location}>
+          <div className={styles.place}>
+            <h3>Location</h3>
+          </div>
+          <div className={styles.yandex_map}>
+            <YMaps>
+              <div>
+                <Map
+                  defaultState={{
+                    center: location.split(","),
+                    zoom: 5,
+                  }}
+                  width={"100%"}
+                  height={"50vh"}
+                >
+                  <Placemark geometry={location.split(",")} />
+                </Map>
+              </div>
+            </YMaps>
+          </div>
+        </div>
+      </>
     </div>
   );
 };
