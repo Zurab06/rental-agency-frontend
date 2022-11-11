@@ -17,7 +17,6 @@
 }
 .header {
   width: 50%;
-  margin-top: 5vh;
   border-bottom: 1px solid;
   padding-bottom: 30px;
 }
@@ -153,6 +152,19 @@
 
     padding: 0 1rem;
   }
+  .main {
+    background: white;
+    width: 100%;
+    display: flex;
+    min-height: 95vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 95vh;
+    padding-top: 20vh;
+    padding-bottom: 3vh;
+    user-select: none;
+  }
 }
 @media (min-width: 769px) {
   .image {
@@ -161,6 +173,7 @@
   }
   .Carousel {
     margin: 10vh;
+    margin-bottom: 1rem;
     background-color: rgb(211, 211, 211);
     height: 100%;
     display: flex;
@@ -176,5 +189,18 @@
   }
   .date button {
     padding: 0 1rem;
+  }
+  .main {
+    background: white;
+    width: 100%;
+    display: flex;
+    min-height: 95vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 95vh;
+    padding-top: 9.5vh;
+    padding-bottom: 3vh;
+    user-select: none;
   }
 }

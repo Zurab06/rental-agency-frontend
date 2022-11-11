@@ -124,6 +124,7 @@
   border-color: red;
   margin: auto;
   margin-top: 80px;
+  padding-bottom: 1rem;
 }
 .main .header {
   flex-wrap: wrap;

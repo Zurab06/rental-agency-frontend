@@ -11,7 +11,10 @@ const Header = () => {
       <Link to="/" className={styles.logo_bar}>
         <img src={logo} alt="" className={styles.logo}></img>
       </Link>
-      <div className={styles.center}>
+      <a
+        href="https://www.youtube.com/watch?v=oHg5SJYRHA0"
+        className={styles.center}
+      >
         <Lottie
           animationData={forest}
           style={{ width: "20%", height: "7.5vh" }}
@@ -24,7 +27,7 @@ const Header = () => {
           animationData={forest}
           style={{ width: "20%", height: "7.5vh" }}
         />
-      </div>
+      </a>
       <div className={styles.signin}>
         <Authorization />
       </div>

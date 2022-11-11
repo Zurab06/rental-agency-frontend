@@ -13,50 +13,46 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchImmovablesById } from "../../features/immovablesSlice";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Lottie from "lottie-react";
 import loader from "../animation/loader.json";
 import { useState } from "react";
-import { getInfoAboutUser, getOrder } from "../../features/userSlice";
-
-
+import { getInfoAboutUser } from "../../features/userSlice";
+import Comments from "../Comments/Comments";
+import moment from "moment/moment";
+import {
+  addUserOffer,
+  fetchAllOffer,
+  fetchLastOffer,
+  fetchUserOffer,
+} from "../../features/offerSlice";
 
 const ImmovablesPage = () => {
-  const dispatch = useDispatch();
-  const [img, setImg] = useState(0);
   const id = useParams().id;
-  
+  const tomorrow = moment().add(1, "days").format(`YYYY-MM-DD`);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
   const loading = useSelector((state) => state.immovables.loading);
+  const needDate = useSelector((state) => state.offer.lastDate);
+  const offerLoading = useSelector((state) => state.offer.loading);
   const immovablesById = useSelector(
     (state) => state.immovables.immovablesById
   );
   const location = useSelector(
     (state) => state.immovables.immovablesById.location
   );
-  const user = useSelector((state) => state.user);
+  const [img, setImg] = useState(0);
 
-  const now = new Date();
-  const today = {
-    dd: now.getDate() + 1,
-    mm: now.getMonth() + 1,
-    yyyy: now.getFullYear(),
-  };
-  today.dd = today.dd < 10 ? "0" + today.dd : today.dd;
-  today.mm = today.mm < 10 ? "0" + today.mm : today.mm;
-
-  const rentDate = `${today.yyyy}-${today.mm}-${today.dd}`;
-  const [startDate, setStartDate] = useState(
-    !!immovablesById.freeToOrder ? immovablesById.freeToOrder : rentDate
-  );
+  const [startDate, setStartDate] = useState(tomorrow);
   const [endDate, setEndDate] = useState(
-    !!immovablesById.freeToOrder ? immovablesById.freeToOrder : rentDate
-  );
-  const [minDate, setMinDate] = useState(
-    !!immovablesById.freeToOrder ? immovablesById.freeToOrder : rentDate
+    moment(startDate).add(1, "days").format(`YYYY-MM-DD`)
   );
   useEffect(() => {
     dispatch(fetchImmovablesById(id));
     dispatch(getInfoAboutUser());
+    dispatch(fetchUserOffer());
+    dispatch(fetchAllOffer());
+    dispatch(fetchLastOffer(id));
   }, [dispatch, id]);
 
   const changeImage = (type) => {
@@ -76,18 +72,7 @@ const ImmovablesPage = () => {
       }
     }
   };
-  const handleOrder = (id, orderStart, orderEnd) => {
-    if (!!!user.order) {
-      dispatch(getOrder({ id, orderStart, orderEnd }));
-      dispatch(fetchImmovablesById(id));
-      dispatch(getInfoAboutUser());
-      setMinDate(endDate);
-    }
-    dispatch(fetchImmovablesById(id));
-    dispatch(getInfoAboutUser());
-  };
-
-  if (loading) {
+  if (loading || offerLoading || !needDate) {
     return (
       <div className={styles.main}>
         <Lottie animationData={loader} style={{ margin: "auto" }} />
@@ -95,6 +80,10 @@ const ImmovablesPage = () => {
     );
   }
 
+  const handleOrder = (start = startDate, end = endDate) => {
+    dispatch(addUserOffer({ start, end, id }));
+    dispatch(fetchUserOffer());
+  };
   return (
     <div className={styles.main}>
       <>
@@ -145,30 +134,46 @@ const ImmovablesPage = () => {
               </div>
             </div>
             <div className={styles.date}>
-              <input
-                type="date"
-                min={minDate}
-                value={startDate}
-                onChange={(e) => {
-                  setStartDate(e.target.value);
-                }}
-              ></input>
-              <input
-                type="date"
-                name="trip-start"
-                value={endDate}
-                min={startDate}
-                onChange={(e) => {
-                  setEndDate(e.target.value);
-                }}
-              ></input>
+              {!!needDate && (
+                <>
+                  <input
+                    type="date"
+                    min={needDate}
+                    value={startDate}
+                    onChange={(e) => {
+                      setStartDate(e.target.value);
+                      setEndDate(
+                        moment(e.target.value)
+                          .add(1, "days")
+                          .format(`YYYY-MM-DD`)
+                      );
+                    }}
+                  ></input>
+                  <input
+                    type="date"
+                    min={moment(startDate).add(1, "days").format(`YYYY-MM-DD`)}
+                    value={endDate}
+                    onChange={(e) => {
+                      setEndDate(e.target.value);
+                    }}
+                  ></input>
+                </>
+              )}
+
               <button
-                onClick={() =>
-                  handleOrder(immovablesById._id, startDate, endDate)
-                }
+                onClick={() => handleOrder()}
                 disabled={user.token ? "" : true}
               >
-                claim order
+                {user.token ? (
+                  <Link
+                    to="/user/main"
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    claim order
+                  </Link>
+                ) : (
+                  "user must be registered"
+                )}
               </button>
             </div>
           </div>
@@ -199,6 +204,7 @@ const ImmovablesPage = () => {
           </div>
         </div>
       </>
+      <Comments />
     </div>
   );
 };
