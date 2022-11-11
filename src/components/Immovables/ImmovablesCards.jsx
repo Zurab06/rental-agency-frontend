@@ -72,7 +72,10 @@ const ImmovablesCards = () => {
       </div>
       <div className={styles.cards} key={4}>
         {loading ? (
-          <Lottie animationData={loader} style={{ margin: "auto" }} />
+          <Lottie
+            animationData={loader}
+            style={{ margin: "auto", marginBottom: "1rem" }}
+          />
         ) : (
           immovables.map((item) => {
             return <ImmovablesCard {...item} key={item._id} token={token} />;
