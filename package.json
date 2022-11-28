@@ -34,6 +34,7 @@
     "react-dom": "^18.2.0",
     "react-final-form": "5.0.1",
     "react-grid-system": "^8.1.6",
+    "react-moment": "^1.1.2",
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
