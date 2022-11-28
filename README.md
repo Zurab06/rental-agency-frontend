@@ -1,6 +1,6 @@
 # Агенство недвижимости
 
-**backend**
+**frontend**
 
 ## Decription
 
